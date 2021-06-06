@@ -25,17 +25,17 @@ navigator.geolocation.getCurrentPosition(storePosition);
 
 //store location data
 function storePosition(position){
-const key = '1a1d6997558d87f7f7526a9681af9b3a';
-var lat = Math.floor(position.coords.latitude);
-var lon = Math.floor(position.coords.longitude);
-/*
-var api_link = 'api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+key;
-*/
-fetch('api.openweathermap.org/data/2.5/weather?lat=41&lon=-89&appid=1a1d6997558d87f7f7526a9681af9b3a')
-    .then(function(response){
-        let data = response.json();
-        return data;
-    });
+    const key = '1a1d6997558d87f7f7526a9681af9b3a';
+    var lat = Math.floor(position.coords.latitude);
+    var lon = Math.floor(position.coords.longitude);
+    /*
+    var api_link = 'api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+key;
+    */
+    fetch('api.openweathermap.org/data/2.5/weather?lat=41&lon=-89&appid=1a1d6997558d87f7f7526a9681af9b3a')
+        .then(function(response){
+            let data = response.json();
+            return data;
+        });
 }
 
 
@@ -48,9 +48,9 @@ const greetings = [
 
 //weather lines
 const weatherL = [
-    'i was doing fine until you showed up', 
-    'leave me alone', 
-    'die in a hole'
+    'the weather is trash', 
+    'good news! you can go and freeze to death outside', 
+    'its raining, so you can take a free shower. Maybe youll be clean for once.'
 ]
 
 //start up mic when button is clicked
