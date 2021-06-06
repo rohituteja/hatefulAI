@@ -23,15 +23,15 @@ const rec = new speechRec();
 
 navigator.geolocation.getCurrentPosition(storePosition); 
 
-//store location data
+//stores location data
 function storePosition(position){
     const key = '1a1d6997558d87f7f7526a9681af9b3a';
     var lat = Math.floor(position.coords.latitude);
     var lon = Math.floor(position.coords.longitude);
-    /*
-    var api_link = 'api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+key;
-    */
-    fetch('api.openweathermap.org/data/2.5/weather?lat=41&lon=-89&appid=1a1d6997558d87f7f7526a9681af9b3a')
+
+    var api_link = 'https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+key;
+
+    fetch(api_link)
         .then(function(response){
             let data = response.json();
             return data;
