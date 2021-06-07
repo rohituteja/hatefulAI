@@ -1,6 +1,7 @@
-//constants from html file
+//constants from html file -------------
 const btn = document.querySelector('.talk');
 const content = document.querySelector('.content');
+//--------------------------------------
 
 //make sure browser has supported features
 try{
@@ -15,15 +16,13 @@ catch(e){
         content.textContent = 'Browser Unsupported';
         }
 }
-
-//global constants
+//--------------------------------------
+//global constants ---------------------
 const speechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
 const rec = new speechRec();
-
-
-navigator.geolocation.getCurrentPosition(storePosition); 
-
+//--------------------------------------
 //stores location data
+navigator.geolocation.getCurrentPosition(storePosition); 
 function storePosition(position){
     const key = '1a1d6997558d87f7f7526a9681af9b3a';
     var lat = Math.floor(position.coords.latitude);
@@ -37,76 +36,69 @@ function storePosition(position){
             return data;
         });
 }
-
-
-//greeting lines
-const greetings = [
-    'i was doing fine until you showed up', 
-    'leave me alone', 
-    'die in a hole'
-]
-
-//weather lines
-const weatherL = [
-    'the weather is trash', 
-    'good news! you can go and freeze to death outside', 
-    'its raining, so you can take a free shower. Maybe youll be clean for once.'
-]
-
-//start up mic when button is clicked
-btn.addEventListener('click', () => {rec.start();});
-
-//console log for when mic is activated
+//--------------------------------------
+//mic control --------------------------
+btn.addEventListener('click', () => {rec.start();}); //start recording on click
 rec.onstart = function() {
-    console.log('recording started');
+    console.log('recording started'); //console log for when mic is activated
 };
-
-//console log for when mic is turned off
 rec.onspeechend = function(){
-    console.log('recording ended');
+    console.log('recording ended'); //console log for when mic is turned off
 }
-
-//logs transcript of what was said then calls readOutLoud() to respond
+//--------------------------------------
+//logging what you said as a string ----
 rec.onresult = function(event){
     const current = event.resultIndex;
-
-    const transcript = event.results[current][0].transcript;
+    const transcript = event.results[current][0].transcript; //string of what you said
     content.textContent = transcript;
     readOutLoud(transcript);
 };
-
-//response function
+//--------------------------------------
+//response function (the AI) -----------
 function readOutLoud(message){
-    const speech = new SpeechSynthesisUtterance();
-
-    //by default, this function is passed the transcript of what user said
-    //this sets default response aka nothing was found to respond to
-    speech.text = 'tell me something i can actually understand';
-
-
-    //if user greets
+    //transcript/string of what you said/asked is passed in
+    const speech = new SpeechSynthesisUtterance(); //the text that the AI will say
+    speech.text = 'tell me something i can actually understand'; //default/fallback response
+    //if user is greeting the AI -----
     if(message.includes('hello')){
+        const greetings = [
+            'who said you could speak to me', 
+            'leave me alone', 
+            'die in a hole'
+        ]
         const greet = greetings[Math.floor(Math.random()*greetings.length)];
         speech.text = greet;
     }
-
+    //-------------------------------
+    //if the user is asks how the AI is
     if(message.includes('how are you')){
-        const greet = greetings[Math.floor(Math.random()*greetings.length)];
-        speech.text = greet;
+        const howWeBe = [
+            'i was doing better until you showed up', 
+            'im a hardcoded speaking javascript file moron, what do you think', 
+            'seriously, who asks an AI made by a college kid how theyre doing'
+        ]
+        const how = howWeBe[Math.floor(Math.random()*howWeBe.length)];
+        speech.text = how;
     }
-    
-    //if user asks for weather
+    //-------------------------------
+    //if user asks for weather ------
     if(message.includes('weather')){
-
-        const weatherR = weatherL[Math.floor(Math.random()*greetings.length)];
+        const weatherL = [
+            'the weather is trash', 
+            'good news! you can go and freeze to death outside', 
+            'its raining, so you can take a free shower. Maybe youll be clean for once.'
+        ]
+        const weatherR = weatherL[Math.floor(Math.random()*weatherL.length)];
         speech.text = weatherR;
     }
-
-    //voice synthesis properties
+    //-------------------------------
+    //voice synthesis properties ----
     speech.volume = 1;
     speech.rate = 1;
     speech.pitch = 1;
     speech.lang = 1; 
     window.speechSynthesis.speak(speech);
+    //-------------------------------
 }
+//--------------------------------------
 
