@@ -41,7 +41,7 @@ function success(position) {
 navigator.geolocation.getCurrentPosition(success);
     //variables for later use (temp in C)
     var temp = document.getElementById('temp').innerHTML - 273.15;
-    var feelsLike = document.getElementById('feelsLike').innerHTML - 273.15;
+    var feelsLike = document.getElementById('feelslike').innerHTML - 273.15;
     var placeName = document.getElementById('place').innerHTML;
     var skies = document.getElementById('weather').innerHTML;
 //--------------------------------------
