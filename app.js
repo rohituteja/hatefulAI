@@ -22,20 +22,28 @@ const speechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
 const rec = new speechRec();
 //--------------------------------------
 //stores location data
-navigator.geolocation.getCurrentPosition(storePosition); 
-function storePosition(position){
+function success(position) {
+    document.getElementById('lat').innerHTML = position.coords.latitude;
+    document.getElementById('long').innerHTML = position.coords.longitude;
+    var lat = document.getElementById('lat').innerHTML
+    var lon = document.getElementById('long').innerHTML
     const key = '1a1d6997558d87f7f7526a9681af9b3a';
-    var lat = Math.floor(position.coords.latitude);
-    var lon = Math.floor(position.coords.longitude);
-
     var api_link = 'https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+key;
-
-    fetch(api_link)
-        .then(function(response){
-            let data = response.json();
-            return data;
-        });
+    fetch(api_link).then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.getElementById('temp').innerHTML = data['main']['temp'];
+            document.getElementById('feelslike').innerHTML = data['main']['feels_like'];
+            document.getElementById('place').innerHTML = data['name'];
+            document.getElementById('weather').innerHTML = data['weather'][0]['main'];
+        })
 }
+navigator.geolocation.getCurrentPosition(success);
+    //variables for later use (temp in C)
+    var temp = document.getElementById('temp').innerHTML - 273.15;
+    var feelsLike = document.getElementById('feelsLike').innerHTML - 273.15;
+    var placeName = document.getElementById('place').innerHTML;
+    var skies = document.getElementById('weather').innerHTML;
 //--------------------------------------
 //mic control --------------------------
 btn.addEventListener('click', () => {rec.start();}); //start recording on click
@@ -83,12 +91,15 @@ function readOutLoud(message){
     //-------------------------------
     //if user asks for weather ------
     if(message.includes('weather')){
-        const weatherL = [
-            'the weather is trash', 
-            'good news! you can go and freeze to death outside', 
-            'its raining, so you can take a free shower. Maybe youll be clean for once.'
-        ]
-        const weatherR = weatherL[Math.floor(Math.random()*weatherL.length)];
+        const weatherR = "In " + placeName + "the temperature is " + temp + "degrees Celsius and feels like"
+            + feelsLike;
+        if (skies == 'Clear') {
+            weatherR += "Today the skies are clear, meaning sadly nothing to ruin your day. At least not weather wise";
+        } else if (skies == 'Rain') {
+            weatherR += "Today there is rain, meaning you can maybe finally wash that smell off you";
+        } else if (skies == 'Snow') {
+            weatherR += "There's snow today, so stay inside and suffer instead! I'll enjoy it";
+        }
         speech.text = weatherR;
     }
     //-------------------------------
