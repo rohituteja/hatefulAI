@@ -40,10 +40,7 @@ function success(position) {
 }
 navigator.geolocation.getCurrentPosition(success);
     //variables for later use (temp in C)
-    var temp = document.getElementById('temp').innerHTML - 273.15;
-    var feelsLike = document.getElementById('feelslike').innerHTML - 273.15;
-    var placeName = document.getElementById('place').innerHTML;
-    var skies = document.getElementById('weather').innerHTML;
+
 //--------------------------------------
 //mic control --------------------------
 btn.addEventListener('click', () => {rec.start();}); //start recording on click
@@ -91,7 +88,11 @@ function readOutLoud(message){
     //-------------------------------
     //if user asks for weather ------
     if(message.includes('weather')){
-        const weatherR = "In " + placeName + "the temperature is " + temp + "degrees Celsius and feels like"
+        var temp = Math.floor(Number(document.getElementById('temp').innerHTML) - 273.15);
+        var feelsLike = Math.floor(Number(document.getElementById('feelslike').innerHTML) - 273.15);
+        var placeName = document.getElementById('place').innerHTML;
+        var skies = document.getElementById('weather').innerHTML;
+        var weatherR = "In " + placeName + "the temperature is " + temp + "degrees Celsius and feels like"
             + feelsLike;
         if (skies == 'Clear') {
             weatherR += "Today the skies are clear, meaning sadly nothing to ruin your day. At least not weather wise";
