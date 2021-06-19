@@ -1,0 +1,73 @@
+body {
+    background-color: lightblue;
+}
+
+h2 {
+    font-size: large;
+}
+
+h4 {
+    visibility: hidden;
+}
+
+h5 {
+    font-weight: normal;
+}
+
+.talk {
+    border: none;
+    background-color: black;
+    font-size: medium;
+    color: lightblue;
+    text-align: center;
+    display: inline-block;
+    padding: 7px 7px;
+}
+
+.mainDiv {
+    padding-top: 15%;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.speech {
+    height: 500 px;
+    border: 3px solid black;
+    width: 65%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.input {
+    text-align: right;
+    margin-right: 20px;
+}
+
+.output {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.disclaimers {
+    width: 65%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }

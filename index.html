@@ -5,17 +5,29 @@
     <meta charset = "UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
     <title>i hate you.</title>
-    
+    <link rel="stylesheet" href="style.css">
 </head>
-<style>
-    h4 {
-        visibility: hidden;
-    }
-</style>
 <body>
-    <h1>please don't talk to me.</h1>
-    <button class = "talk">Talk!</button>
-    <h3 class = content></h3>
+    <div class = "mainDiv">
+        <div class = "title">
+            <h1>please don't talk to me.</h1>
+        </div>
+        <div class = "button">
+            <button class = "talk">TALK!</button>
+        </div>
+        <div class = "speech">
+            <div class = "input">
+                <h3 class = inputSpeech>-what you say will show here-</h3>
+            </div>
+            <div class = "output">
+                <h3 class = aiSpeech>-what the ai responds will come here-</h3>
+            </div>
+        </div>
+        <div class = disclaimers>
+            <h5> Microphone access is needed to speak to the AI</h5>
+            <h5> Location access is needed for weather</h5>
+        </div>
+    </div>
     <h4 id = lat> </h4>
     <h4 id = long> </h4>
     <h4 id = temp> </h4>
@@ -23,6 +35,13 @@
     <h4 id = feelslike> </h4>
     <h4 id = weather> </h4>
     <script src = app.js></script>
-
+    <div class = "footer">
+        <h2>
+            A project by Rohit Tuteja and Aran Swamy    
+        </h2>
+        <p>
+            Code for this project can be found <a href = "https://github.com/rohituteja/hatefulAI"> on Github</a>
+        </p>
+    </div>
 </body>
 </html>
