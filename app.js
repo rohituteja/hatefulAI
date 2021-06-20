@@ -131,12 +131,12 @@ function readOutLoud(message){
         const second = message.charAt(index + 2);
         value = parseInt(first, 10) + parseInt(second,10);
 
-        let number= 0;
-        for(let i =index - 1; i > 0; i--) {
-            if(message.charAt(i).localeCompare(' ') == 0) {
-                number = i;
-            }
-        }
+        // let number= 0;
+        // for(let i =index - 1; i > 0; i--) {
+        //     if(message.charAt(i).localeCompare(' ') == 0) {
+        //         number = i;
+        //     }
+        // }
         console.log(value);
         toSay += value.toString();
         speech.text += toSay;
