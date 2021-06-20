@@ -2,6 +2,7 @@
 const btn = document.querySelector('.talk');
 const inputSpeech = document.querySelector('.inputSpeech');
 const aiOutput = document.querySelector('.aiSpeech');
+const numbers = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven" : 7, "eight" : 8, "nine": 9, "zero" : 0};
 //--------------------------------------
 //make sure browser has supported features
 try{
@@ -121,6 +122,29 @@ function readOutLoud(message){
         }
         speech.text += weatherR; //final output is set
     }
+    var toSay = "";
+    if(message.includes('+')) {
+        toSay += "Are you stupid? It's ";
+        const index = message.indexOf("+");
+        var value = 0;
+        const first = message.charAt(index -2)
+        const second = message.charAt(index + 2);
+        value = parseInt(first, 10) + parseInt(second,10);
+
+        let number= 0;
+        for(let i =index - 1; i > 0; i--) {
+            if(message.charAt(i).localeCompare(' ') == 0) {
+                number = i;
+            }
+        }
+        console.log(value);
+        toSay += value.toString();
+        speech.text += toSay;
+    }
+
+    // function findNumber(message, index, otherIndex) {
+    //
+    // }
     //-------------------------------
     //voice synthesis properties ----
     speech.volume = 1;
