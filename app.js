@@ -135,7 +135,9 @@ function readOutLoud(message) {
         }
         speech.text += weatherR; //final output is set
     }
+    //Verbal Calculator portion
     var toSay = "";
+    // Addition
     if (message.includes('+')) {
         const startMessage = [
             'Are you stupid? It\'s ',
@@ -144,28 +146,24 @@ function readOutLoud(message) {
             'And I thought they said humans were the most intelligent creatures on Earth. It\'s ',
             'Did your math teacher not teach you how to carry? It\'s'
         ]
-        toSay += startMessage[Math.floor(Math.random() * startMessage.length)];
+        toSay += startMessage[Math.floor(Math.random() * startMessage.length)]; //select a random response
         const index = message.indexOf("+");
         var value = 0;
         const firstIndex = index - 2;
         const secondIndex = index + 2;
-        //value = parseInt(first, 10) + parseInt(second, 10);
 
         let number = 0;
         for (let i = firstIndex; i > 0; i--) {
-            if (message.charAt(i).localeCompare(' ') == 0) {
+            if (message.charAt(i).localeCompare(' ') === 0) {
                 number = i;
             }
         }
-        value += parseInt(message.substring(number + 1, firstIndex +1),10) + parseInt(message.substring(secondIndex,message.length),10);
+        value += parseInt(message.substring(number + 1, firstIndex + 1), 10) + parseInt(message.substring(secondIndex, message.length), 10);
         console.log(value);
         toSay += value.toString();
         speech.text += toSay;
     }
 
-    // function findNumber(message, index, otherIndex) {
-    //
-    // }
     //-------------------------------
     //voice synthesis properties ----
     speech.volume = 1;
