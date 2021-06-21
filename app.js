@@ -162,6 +162,81 @@ function readOutLoud(message) {
         console.log(value);
         toSay += value.toString();
         speech.text += toSay;
+        //Subtraction
+    } else if (message.includes('-')) {
+        const startMessage = [
+            'Are you stupid? It\'s ',
+            'Why is this a question that you need to ask me? It\'s ',
+            'You are literally using a webpage, you can just Google it. It\'s ',
+            'And I thought they said humans were the most intelligent creatures on Earth. It\'s ',
+            'Did your math teacher not teach you how to carry? It\'s'
+        ]
+        toSay += startMessage[Math.floor(Math.random() * startMessage.length)]; //select a random response
+        const index = message.indexOf("-");
+        var value = 0;
+        const firstIndex = index - 2;
+        const secondIndex = index + 2;
+
+        let number = 0;
+        for (let i = firstIndex; i > 0; i--) {
+            if (message.charAt(i).localeCompare(' ') === 0) {
+                number = i;
+            }
+        }
+        value += parseInt(message.substring(number + 1, firstIndex + 1), 10) - parseInt(message.substring(secondIndex, message.length), 10);
+        console.log(value);
+        toSay += value.toString();
+        speech.text += toSay;
+        //Multiplication
+    } else if (message.includes('*')) {
+        const startMessage = [
+            'Are you stupid? It\'s ',
+            'Why is this a question that you need to ask me? It\'s ',
+            'You are literally using a webpage, you can just Google it. It\'s ',
+            'And I thought they said humans were the most intelligent creatures on Earth. It\'s ',
+            'Did your math teacher not teach you how to carry? It\'s'
+        ]
+        toSay += startMessage[Math.floor(Math.random() * startMessage.length)]; //select a random response
+        const index = message.indexOf("*");
+        var value = 0;
+        const firstIndex = index - 2;
+        const secondIndex = index + 2;
+
+        let number = 0;
+        for (let i = firstIndex; i > 0; i--) {
+            if (message.charAt(i).localeCompare(' ') === 0) {
+                number = i;
+            }
+        }
+        value += parseInt(message.substring(number + 1, firstIndex + 1), 10) * parseInt(message.substring(secondIndex, message.length), 10);
+        console.log(value);
+        toSay += value.toString();
+        speech.text += toSay;
+        //Division
+    } else if (message.includes('/')) {
+        const startMessage = [
+            'Are you stupid? It\'s ',
+            'Why is this a question that you need to ask me? It\'s ',
+            'You are literally using a webpage, you can just Google it. It\'s ',
+            'And I thought they said humans were the most intelligent creatures on Earth. It\'s ',
+            'Did your math teacher not teach you how to carry? It\'s'
+        ]
+        toSay += startMessage[Math.floor(Math.random() * startMessage.length)]; //select a random response
+        const index = message.indexOf(".");
+        var value = 0;
+        const firstIndex = index - 2;
+        const secondIndex = index + 2;
+
+        let number = 0;
+        for (let i = firstIndex; i > 0; i--) {
+            if (message.charAt(i).localeCompare(' ') === 0) {
+                number = i;
+            }
+        }
+        value += (parseFloat(message.substring(number + 1, firstIndex + 1)) / parseFloat(message.substring(secondIndex, message.length)));
+        console.log(value);
+        toSay += value.toString();
+        speech.text += toSay;
     }
 
     //-------------------------------
