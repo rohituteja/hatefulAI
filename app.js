@@ -138,7 +138,7 @@ function readOutLoud(message) {
     //Verbal Calculator portion
     var toSay = "";
     // Addition
-    if (message.includes('+')) {
+    if (message.includes('+' || "plus")) {
         const startMessage = [
             'Are you stupid? It\'s ',
             'Why is this a question that you need to ask me? It\'s ',
@@ -163,7 +163,7 @@ function readOutLoud(message) {
         toSay += value.toString();
         speech.text += toSay;
         //Subtraction
-    } else if (message.includes('-')) {
+    } else if (message.includes('-' || "minus" )) {
         const startMessage = [
             'Are you stupid? It\'s ',
             'Why is this a question that you need to ask me? It\'s ',
@@ -188,7 +188,7 @@ function readOutLoud(message) {
         toSay += value.toString();
         speech.text += toSay;
         //Multiplication
-    } else if (message.includes('*')) {
+    } else if (message.includes('*'|| "times" )) {
         const startMessage = [
             'Are you stupid? It\'s ',
             'Why is this a question that you need to ask me? It\'s ',
@@ -213,7 +213,7 @@ function readOutLoud(message) {
         toSay += value.toString();
         speech.text += toSay;
         //Division
-    } else if (message.includes('/')) {
+    } else if (message.includes('/' || "divided by" || "over")) {
         const startMessage = [
             'Are you stupid? It\'s ',
             'Why is this a question that you need to ask me? It\'s ',
