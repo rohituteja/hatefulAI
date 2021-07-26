@@ -18,7 +18,7 @@ Feature List:
 
 -weather information: complete
 
--math: not started
+-math: Basic Operations functional
 
 -conversations: incomplete
 
