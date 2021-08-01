@@ -2,6 +2,10 @@
 const btn = document.querySelector('.talk');
 const inputSpeech = document.querySelector('.inputSpeech');
 const aiOutput = document.querySelector('.aiSpeech');
+const wolframKey = "HVQXWX-37GELV7JQG";
+const WolframAlphaAPI = require('wolfram-alpha-api');
+const waApi = WolframAlphaAPI(wolframKey);
+
 const numbers = {
     "one": 1,
     "two": 2,
