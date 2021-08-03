@@ -2,22 +2,6 @@
 const btn = document.querySelector('.talk');
 const inputSpeech = document.querySelector('.inputSpeech');
 const aiOutput = document.querySelector('.aiSpeech');
-const wolframKey = "HVQXWX-37GELV7JQG";
-const WolframAlphaAPI = require('wolfram-alpha-api');
-const waApi = WolframAlphaAPI(wolframKey);
-
-const numbers = {
-    "one": 1,
-    "two": 2,
-    "three": 3,
-    "four": 4,
-    "five": 5,
-    "six": 6,
-    "seven": 7,
-    "eight": 8,
-    "nine": 9,
-    "zero": 0
-};
 //--------------------------------------
 //make sure browser has supported features
 try {
@@ -57,7 +41,13 @@ function getWeather() {
 
     navigator.geolocation.getCurrentPosition(success); //actual call to get position via Geolocator api
 }
-
+function python(){
+    $.ajax({
+      url: "wolfram.py",
+    }).done(function() {
+     alert('finished python script');;
+    });
+}
 getWeather(); //used so that weather is updated each time user asks for it, called now to get inital weather data
 //--------------------------------------
 //mic control --------------------------
@@ -97,7 +87,7 @@ function readOutLoud(message) {
     }
     //-------------------------------
     //if the user is asks how the AI is
-    if (message.includes('how are you')) {
+    else if (message.includes('how are you')) {
         //array of possible responses
         const howWeBe = [
             'i was doing better until you showed up',
@@ -109,7 +99,7 @@ function readOutLoud(message) {
     }
     //-------------------------------
     //if user asks for weather ------
-    if (message.includes('weather')) {
+     else if (message.includes('weather')) {
         getWeather(); //updates weather
         //variables for weather data --
         var temp = Math.floor(Number(document.getElementById('temp').innerHTML) - 273.15);
@@ -139,110 +129,16 @@ function readOutLoud(message) {
         }
         speech.text += weatherR; //final output is set
     }
-    //Verbal Calculator portion
-    var toSay = "";
-    // Addition
-    if (message.includes('+' || "plus")) {
-        const startMessage = [
-            'Are you stupid? It\'s ',
-            'Why is this a question that you need to ask me? It\'s ',
-            'You are literally using a webpage, you can just Google it. It\'s ',
-            'And I thought they said humans were the most intelligent creatures on Earth. It\'s ',
-            'Did your math teacher not teach you how to carry? It\'s'
-        ]
-        toSay += startMessage[Math.floor(Math.random() * startMessage.length)]; //select a random response
-        const index = message.indexOf("+");
-        var value = 0;
-        const firstIndex = index - 2;
-        const secondIndex = index + 2;
-
-        let number = 0;
-        for (let i = firstIndex; i > 0; i--) {
-            if (message.charAt(i).localeCompare(' ') === 0) {
-                number = i;
-            }
-        }
-        value += parseInt(message.substring(number + 1, firstIndex + 1), 10) + parseInt(message.substring(secondIndex, message.length), 10);
-        console.log(value);
-        toSay += value.toString();
-        speech.text += toSay;
-        //Subtraction
-    } else if (message.includes('-' || "minus" )) {
-        const startMessage = [
-            'Are you stupid? It\'s ',
-            'Why is this a question that you need to ask me? It\'s ',
-            'You are literally using a webpage, you can just Google it. It\'s ',
-            'And I thought they said humans were the most intelligent creatures on Earth. It\'s ',
-            'Did your math teacher not teach you how to carry? It\'s'
-        ]
-        toSay += startMessage[Math.floor(Math.random() * startMessage.length)]; //select a random response
-        const index = message.indexOf("-");
-        var value = 0;
-        const firstIndex = index - 2;
-        const secondIndex = index + 2;
-
-        let number = 0;
-        for (let i = firstIndex; i > 0; i--) {
-            if (message.charAt(i).localeCompare(' ') === 0) {
-                number = i;
-            }
-        }
-        value += parseInt(message.substring(number + 1, firstIndex + 1), 10) - parseInt(message.substring(secondIndex, message.length), 10);
-        console.log(value);
-        toSay += value.toString();
-        speech.text += toSay;
-        //Multiplication
-    } else if (message.includes('*'|| "times" )) {
-        const startMessage = [
-            'Are you stupid? It\'s ',
-            'Why is this a question that you need to ask me? It\'s ',
-            'You are literally using a webpage, you can just Google it. It\'s ',
-            'And I thought they said humans were the most intelligent creatures on Earth. It\'s ',
-            'Did your math teacher not teach you how to carry? It\'s'
-        ]
-        toSay += startMessage[Math.floor(Math.random() * startMessage.length)]; //select a random response
-        const index = message.indexOf("*");
-        var value = 0;
-        const firstIndex = index - 2;
-        const secondIndex = index + 2;
-
-        let number = 0;
-        for (let i = firstIndex; i > 0; i--) {
-            if (message.charAt(i).localeCompare(' ') === 0) {
-                number = i;
-            }
-        }
-        value += parseInt(message.substring(number + 1, firstIndex + 1), 10) * parseInt(message.substring(secondIndex, message.length), 10);
-        console.log(value);
-        toSay += value.toString();
-        speech.text += toSay;
-        //Division
-    } else if (message.includes('/' || "divided by" || "over")) {
-        const startMessage = [
-            'Are you stupid? It\'s ',
-            'Why is this a question that you need to ask me? It\'s ',
-            'You are literally using a webpage, you can just Google it. It\'s ',
-            'And I thought they said humans were the most intelligent creatures on Earth. It\'s ',
-            'Did your math teacher not teach you how to carry? It\'s'
-        ]
-        toSay += startMessage[Math.floor(Math.random() * startMessage.length)]; //select a random response
-        const index = message.indexOf(".");
-        var value = 0;
-        const firstIndex = index - 2;
-        const secondIndex = index + 2;
-
-        let number = 0;
-        for (let i = firstIndex; i > 0; i--) {
-            if (message.charAt(i).localeCompare(' ') === 0) {
-                number = i;
-            }
-        }
-        value += (parseFloat(message.substring(number + 1, firstIndex + 1)) / parseFloat(message.substring(secondIndex, message.length)));
-        console.log(value);
-        toSay += value.toString();
-        speech.text += toSay;
+    // //google placeholder
+    // else if (message.includes("google")) {
+    // }
+    //-------------------------------
+    //generic wolfram alpha search --
+    else {
+        document.getElementById('generic').innerHTML = message;
+        python();
+        console.log(document.getElementById('generic').innerHTML);
     }
-
     //-------------------------------
     //voice synthesis properties ----
     speech.volume = 1;
